@@ -1,6 +1,5 @@
 package com.lojavirtual.api.config;
 
-// SecurityConfig.java
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -23,17 +22,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults())
-                .csrf().disable() // comum em APIs REST
+                .cors(Customizer.withDefaults()) // habilita CORS com base no Bean abaixo
+                .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/produto/**").hasRole("ADMIN") // exige role ADMIN
+                        .requestMatchers("/api/produto/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .httpBasic(); // autenticação Basic
+                .httpBasic();
 
         return http.build();
     }
 
+    @Bean // <- ESSENCIAL
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(Arrays.asList(
@@ -45,12 +45,10 @@ public class SecurityConfig {
         config.setAllowedHeaders(Arrays.asList("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config); // aplica globalmente
+        source.registerCorsConfiguration("/**", config);
         return source;
     }
 
-
-    // Usuário em memória (comum em dev/teste; no mercado isso viria de banco de dados ou LDAP)
     @Bean
     public UserDetailsService userDetailsService() {
         var user = User.builder()
