@@ -1,5 +1,6 @@
-# Use uma imagem base com o JDK (Java Development Kit)
-FROM openjdk:11-jdk-slim
+# Use uma imagem base com o JDK 21
+# atualizar
+FROM openjdk:21-jdk-slim
 
 # Instalar Maven
 RUN apt-get update && apt-get install -y maven
