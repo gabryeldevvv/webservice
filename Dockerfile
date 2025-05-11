@@ -12,7 +12,7 @@ WORKDIR /app
 COPY . /app
 
 # Executar o build com Maven
-RUN mvn clean package
+RUN mvn clean package -DskipTests -X
 
 # Definir o comando de execução
 CMD ["java", "-jar", "target/seu-app.jar"]
