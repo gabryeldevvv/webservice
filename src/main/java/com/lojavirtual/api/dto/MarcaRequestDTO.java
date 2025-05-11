@@ -1,13 +1,13 @@
 package com.lojavirtual.api.dto;
 
 import jakarta.validation.constraints.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MarcaRequestDTO {
 
         @NotBlank(message = "Nome da marca é obrigatório")

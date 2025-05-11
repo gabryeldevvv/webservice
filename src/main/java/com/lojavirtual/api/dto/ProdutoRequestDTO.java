@@ -3,15 +3,15 @@ package com.lojavirtual.api.dto;
 import com.lojavirtual.api.model.Categoria;
 import com.lojavirtual.api.model.Marca;
 import jakarta.validation.constraints.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProdutoRequestDTO {
 
         @NotBlank(message = "O nome do produto é obrigatório")
