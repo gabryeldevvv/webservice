@@ -15,6 +15,7 @@ COPY . /app
 RUN mvn clean package -DskipTests -X
 
 # Definir o comando de execução
+FROM openjdk:21-jdk-slim
+COPY --from-build target/api-0.0.1-SNAPSHOT.jar demo.jar
 EXPOSE 8080
-
-COPY --from-build "target/api-0.0.1-SNAPSHOT.jar"
+ENTRYPOINT ["java", "-jar", "demo.jar"]
