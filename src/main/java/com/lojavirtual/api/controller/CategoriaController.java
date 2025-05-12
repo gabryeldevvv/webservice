@@ -27,7 +27,7 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.listarTodas());
     }
 
-    @GetMapping
+    @GetMapping("/{search}")
     public ResponseEntity<List<CategoriaResponseDTO>> listarPorBusca(
             @RequestParam(value = "search", required = false) String search
     ) {
