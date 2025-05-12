@@ -29,6 +29,14 @@ public class CategoriaService {
                 .toList();
     }
 
+    public List<CategoriaResponseDTO> buscarPorNomeParcial(String nome) {
+        return categoriaRepository.findByNomeContainingIgnoreCase(nome)
+                .stream()
+                .map(categoriaMapper::toResponseDTO)
+                .toList();
+    }
+
+
     public CategoriaResponseDTO atualizarCategoria(Long id, CategoriaRequestDTO dto) {
         Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));

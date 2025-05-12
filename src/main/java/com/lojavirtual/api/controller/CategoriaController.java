@@ -27,6 +27,16 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.listarTodas());
     }
 
+    @GetMapping
+    public ResponseEntity<List<CategoriaResponseDTO>> listarPorBusca(
+            @RequestParam(value = "search", required = false) String search
+    ) {
+        if (search != null && !search.isBlank()) {
+            return ResponseEntity.ok(categoriaService.buscarPorNomeParcial(search));
+        }
+        return ResponseEntity.ok(categoriaService.listarTodas());
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<CategoriaResponseDTO> atualizar(
             @PathVariable Long id,
