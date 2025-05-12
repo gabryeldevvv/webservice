@@ -1,5 +1,6 @@
 package com.lojavirtual.api.advice;
 
+import com.lojavirtual.api.exception.CategoriaNaoEncontradaException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -52,6 +53,16 @@ public class RequestExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(erro);
     }
+
+    @ExceptionHandler(CategoriaNaoEncontradaException.class)
+    public ResponseEntity<Map<String,String>> handleNotFound(CategoriaNaoEncontradaException ex) {
+        logger.warn("Categoria não encontrada:", ex);
+        Map<String,String> body = new HashMap<>();
+        body.put("erro", "Recurso não encontrado");
+        body.put("mensagem", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+    }
+
 
     private void logStackTraceDetails(Exception ex) {
         if (ex.getStackTrace().length > 0) {

@@ -2,6 +2,7 @@ package com.lojavirtual.api.service;
 
 import com.lojavirtual.api.dto.CategoriaRequestDTO;
 import com.lojavirtual.api.dto.CategoriaResponseDTO;
+import com.lojavirtual.api.exception.CategoriaNaoEncontradaException;
 import com.lojavirtual.api.mapper.CategoriaMapper;
 import com.lojavirtual.api.model.Categoria;
 import com.lojavirtual.api.repository.CategoriaRepository;
@@ -36,10 +37,16 @@ public class CategoriaService {
                 .toList();
     }
 
+    public CategoriaResponseDTO buscarPorId(Long id) {
+        Categoria categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new CategoriaNaoEncontradaException(id));
+        return categoriaMapper.toResponseDTO(categoria);
+    }
+
 
     public CategoriaResponseDTO atualizarCategoria(Long id, CategoriaRequestDTO dto) {
         Categoria categoria = categoriaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+                .orElseThrow(() -> new CategoriaNaoEncontradaException(id));
         categoriaMapper.updateEntityFromDTO(dto, categoria);
         return categoriaMapper.toResponseDTO(categoriaRepository.save(categoria));
     }
