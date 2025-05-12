@@ -5,6 +5,7 @@ import com.lojavirtual.api.dto.CategoriaResponseDTO;
 import com.lojavirtual.api.service.CategoriaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,27 +19,28 @@ public class CategoriaController {
     private final CategoriaService categoriaService;
 
     @PostMapping
-    public ResponseEntity<CategoriaResponseDTO> criar(@Valid @RequestBody CategoriaRequestDTO dto) {
-        return ResponseEntity.ok(categoriaService.criarCategoria(dto));
+    public ResponseEntity<CategoriaResponseDTO> criar(
+            @Valid @RequestBody CategoriaRequestDTO dto
+    ) {
+        CategoriaResponseDTO criado = categoriaService.criarCategoria(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(criado);
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoriaResponseDTO>> listar() {
-        return ResponseEntity.ok(categoriaService.listarTodas());
-    }
-
-    @GetMapping("/{search}")
-    public ResponseEntity<List<CategoriaResponseDTO>> listarPorBusca(
+    public ResponseEntity<List<CategoriaResponseDTO>> listar(
             @RequestParam(value = "search", required = false) String search
     ) {
-        if (search != null && !search.isBlank()) {
-            return ResponseEntity.ok(categoriaService.buscarPorNomeParcial(search));
-        }
-        return ResponseEntity.ok(categoriaService.listarTodas());
+        List<CategoriaResponseDTO> lista =
+                (search != null && !search.isBlank())
+                        ? categoriaService.buscarPorNomeParcial(search)
+                        : categoriaService.listarTodas();
+        return ResponseEntity.ok(lista);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoriaResponseDTO> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<CategoriaResponseDTO> buscarPorId(
+            @PathVariable Long id
+    ) {
         CategoriaResponseDTO dto = categoriaService.buscarPorId(id);
         return ResponseEntity.ok(dto);
     }
@@ -48,6 +50,7 @@ public class CategoriaController {
             @PathVariable Long id,
             @Valid @RequestBody CategoriaRequestDTO dto
     ) {
-        return ResponseEntity.ok(categoriaService.atualizarCategoria(id, dto));
+        CategoriaResponseDTO atualizado = categoriaService.atualizarCategoria(id, dto);
+        return ResponseEntity.ok(atualizado);
     }
 }
