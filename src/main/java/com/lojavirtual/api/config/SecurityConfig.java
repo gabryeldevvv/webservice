@@ -22,13 +22,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults()) // habilita CORS com base no Bean abaixo
-                .csrf().disable()
+                .cors(Customizer.withDefaults())
+                .csrf(csrf -> csrf.disable())  // correct way to disable CSRF
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/produto/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .httpBasic();
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
