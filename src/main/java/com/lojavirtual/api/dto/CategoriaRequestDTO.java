@@ -17,5 +17,7 @@ public class CategoriaRequestDTO {
         @Size(max = 1000, message = "A descrição deve ter no máximo 1000 caracteres")
         private String descricao;
 
-        private Boolean ativa; // Opcional para permitir padrão true no mapper
+        private Boolean ativa;
+
+        private Long idPai;
 }

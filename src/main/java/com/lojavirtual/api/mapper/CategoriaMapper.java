@@ -12,22 +12,36 @@ public class CategoriaMapper {
         return Categoria.builder()
                 .nome(dto.getNome())
                 .descricao(dto.getDescricao())
-                .ativa(dto.getAtiva() != null ? dto.getAtiva() : true)  // Valor padrão
+                .ativa(dto.getAtiva() != null ? dto.getAtiva() : true)
                 .build();
     }
 
     public CategoriaResponseDTO toResponseDTO(Categoria categoria) {
-        return CategoriaResponseDTO.builder()
+        CategoriaResponseDTO.CategoriaResponseDTOBuilder builder = CategoriaResponseDTO.builder()
                 .id(categoria.getId())
                 .nome(categoria.getNome())
                 .descricao(categoria.getDescricao())
-                .ativa(categoria.isAtiva())
-                .build();
+                .ativa(categoria.isAtiva());
+
+        // Preenche idPai e nomePai se existir
+        if (categoria.getPai() != null) {
+            builder.idPai(categoria.getPai().getId())
+                    .nomePai(categoria.getPai().getNome());
+        }
+
+        return builder.build();
     }
 
     public void updateEntityFromDTO(CategoriaRequestDTO dto, Categoria categoria) {
-        if (dto.getNome() != null) categoria.setNome(dto.getNome());
-        if (dto.getDescricao() != null) categoria.setDescricao(dto.getDescricao());
-        if (dto.getAtiva() != null) categoria.setAtiva(dto.getAtiva());
+        if (dto.getNome() != null) {
+            categoria.setNome(dto.getNome());
+        }
+        if (dto.getDescricao() != null) {
+            categoria.setDescricao(dto.getDescricao());
+        }
+        if (dto.getAtiva() != null) {
+            categoria.setAtiva(dto.getAtiva());
+        }
+        // Relação de pai será tratada no service
     }
 }

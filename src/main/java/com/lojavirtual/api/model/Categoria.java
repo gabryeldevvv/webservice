@@ -15,7 +15,7 @@ import java.util.List;
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categoria") // Mantém o nome da coluna no banco
+    @Column(name = "id_categoria")
     private Long id;
 
     @Column(nullable = false, unique = true, length = 50)
@@ -26,6 +26,13 @@ public class Categoria {
 
     @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean ativa = true;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_pai")
+    private Categoria pai;
+
+    @OneToMany(mappedBy = "pai", cascade = CascadeType.ALL)
+    private List<Categoria> filhas;
 
     @OneToMany(mappedBy = "categoria")
     private List<Produto> produtos;

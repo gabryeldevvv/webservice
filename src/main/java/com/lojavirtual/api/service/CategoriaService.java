@@ -18,7 +18,17 @@ public class CategoriaService {
     private final CategoriaMapper categoriaMapper;
 
     public CategoriaResponseDTO criarCategoria(CategoriaRequestDTO dto) {
+        // Mapeia os campos básicos
         Categoria categoria = categoriaMapper.toEntity(dto);
+
+        // Se idPai for informado, busca e associa a categoria pai
+        if (dto.getIdPai() != null) {
+            Categoria pai = categoriaRepository.findById(dto.getIdPai())
+                    .orElseThrow(() -> new CategoriaNaoEncontradaException(dto.getIdPai()));
+            categoria.setPai(pai);
+        }
+
+        // Salva a categoria
         Categoria salva = categoriaRepository.save(categoria);
         return categoriaMapper.toResponseDTO(salva);
     }
@@ -43,11 +53,24 @@ public class CategoriaService {
         return categoriaMapper.toResponseDTO(categoria);
     }
 
-
     public CategoriaResponseDTO atualizarCategoria(Long id, CategoriaRequestDTO dto) {
+        // Busca a categoria existente
         Categoria categoria = categoriaRepository.findById(id)
                 .orElseThrow(() -> new CategoriaNaoEncontradaException(id));
+
+        // Atualiza campos básicos
         categoriaMapper.updateEntityFromDTO(dto, categoria);
-        return categoriaMapper.toResponseDTO(categoriaRepository.save(categoria));
+
+        // Ajusta relação de categoria pai
+        if (dto.getIdPai() != null) {
+            Categoria pai = categoriaRepository.findById(dto.getIdPai())
+                    .orElseThrow(() -> new CategoriaNaoEncontradaException(dto.getIdPai()));
+            categoria.setPai(pai);
+        } else {
+            categoria.setPai(null);
+        }
+
+        Categoria atualizada = categoriaRepository.save(categoria);
+        return categoriaMapper.toResponseDTO(atualizada);
     }
 }

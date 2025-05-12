@@ -12,6 +12,7 @@ public class CategoriaResponseDTO {
     private Long id;
     private String nome;
     private String descricao;
-    private boolean ativa;
-
+    private Boolean ativa;
+    private Long idPai;
+    private String nomePai;
 }
