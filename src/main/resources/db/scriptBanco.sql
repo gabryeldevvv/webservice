@@ -102,6 +102,7 @@ CREATE TABLE categoria (
 -- Adicionando relacionamentos faltantes
 ALTER TABLE produto ADD COLUMN id_marca INTEGER REFERENCES marca(id_marca);
 ALTER TABLE produto ADD COLUMN id_categoria INTEGER REFERENCES categoria(id_categoria);
+ALTER TABLE categoria ADD COLUMN id_pai INTEGER REFERENCES categoria(id_categoria);
 
 -- Tabela de imagens do produto (nova)
 CREATE TABLE imagem_produto (
