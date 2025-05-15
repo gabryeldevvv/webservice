@@ -38,7 +38,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<?> buscarPorId(@PathVariable String id) {
         try {
             return ResponseEntity.ok(produtoService.buscarPorId(id));
         } catch (Exception e) {

@@ -58,8 +58,8 @@ public class ProdutoService {
                 .collect(Collectors.toList());
     }
 
-    public ProdutoResponseDTO buscarPorId(Long id) {
-        Produto produto = produtoRepository.findById(id)
+    public ProdutoResponseDTO buscarPorId(String id) {
+        Produto produto = produtoRepository.findBySku(id)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
         return produtoMapper.toResponseDTO(produto);
     }
