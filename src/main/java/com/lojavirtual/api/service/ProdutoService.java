@@ -10,6 +10,9 @@ import com.lojavirtual.api.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ProdutoService {
@@ -21,7 +24,6 @@ public class ProdutoService {
     public ProdutoResponseDTO criarProduto(ProdutoRequestDTO dto) {
         Produto produto = produtoMapper.toEntity(dto);
 
-        // Valida e carrega relacionamentos
         if (dto.getCategoria() != null) {
             produto.setCategoria(
                     categoriaRepository.findById(dto.getCategoria().getId())
@@ -50,5 +52,22 @@ public class ProdutoService {
         return produtoMapper.toResponseDTO(salvo);
     }
 
-    // Outros métodos (listar, deletar, etc.) podem ser implementados conforme necessário.
+    public List<ProdutoResponseDTO> listarTodos() {
+        return produtoRepository.findAll().stream()
+                .map(produtoMapper::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public ProdutoResponseDTO buscarPorId(Long id) {
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        return produtoMapper.toResponseDTO(produto);
+    }
+
+    public void deletar(Long id) {
+        if (!produtoRepository.existsById(id)) {
+            throw new RuntimeException("Produto não encontrado");
+        }
+        produtoRepository.deleteById(id);
+    }
 }
