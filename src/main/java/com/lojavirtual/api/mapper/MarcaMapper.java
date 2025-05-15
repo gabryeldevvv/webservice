@@ -13,7 +13,6 @@ public class MarcaMapper {
                 .nome(dto.getNome())
                 .descricao(dto.getDescricao())
                 .website(dto.getWebsite())
-                .ativa(dto.getAtiva() != null ? dto.getAtiva() : true)
                 .build();
     }
 
@@ -36,9 +35,6 @@ public class MarcaMapper {
         }
         if (dto.getWebsite() != null) {
             marca.setWebsite(dto.getWebsite());
-        }
-        if (dto.getAtiva() != null) {
-            marca.setAtiva(dto.getAtiva());
         }
     }
 }
