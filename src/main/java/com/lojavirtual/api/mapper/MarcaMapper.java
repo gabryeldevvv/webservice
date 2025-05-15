@@ -41,3 +41,4 @@ public class MarcaMapper {
             marca.setAtiva(dto.getAtiva());
         }
     }
+}
