@@ -5,7 +5,7 @@ import com.lojavirtual.api.dto.MarcaResponseDTO;
 import com.lojavirtual.api.service.MarcaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,13 +19,30 @@ public class MarcaController {
     private final MarcaService marcaService;
 
     @PostMapping
-    public ResponseEntity<MarcaResponseDTO> criar(@Valid @RequestBody MarcaRequestDTO dto) {
-        return ResponseEntity.ok(marcaService.criarMarca(dto));
+    public ResponseEntity<MarcaResponseDTO> criar(
+            @Valid @RequestBody MarcaRequestDTO dto
+    ) {
+        MarcaResponseDTO criado = marcaService.criarMarca(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(criado);
     }
 
     @GetMapping
-    public ResponseEntity<List<MarcaResponseDTO>> listar() {
-        return ResponseEntity.ok(marcaService.listarTodas());
+    public ResponseEntity<List<MarcaResponseDTO>> listar(
+            @RequestParam(value = "search", required = false) String search
+    ) {
+        List<MarcaResponseDTO> lista =
+                (search != null && !search.isBlank())
+                        ? marcaService.buscarPorNomeParcial(search)
+                        : marcaService.listarTodas();
+        return ResponseEntity.ok(lista);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MarcaResponseDTO> buscarPorId(
+            @PathVariable Long id
+    ) {
+        MarcaResponseDTO dto = marcaService.buscarPorId(id);
+        return ResponseEntity.ok(dto);
     }
 
     @PutMapping("/{id}")
@@ -33,7 +50,8 @@ public class MarcaController {
             @PathVariable Long id,
             @Valid @RequestBody MarcaRequestDTO dto
     ) {
-        return ResponseEntity.ok(marcaService.atualizarMarca(id, dto));
+        MarcaResponseDTO atualizado = marcaService.atualizarMarca(id, dto);
+        return ResponseEntity.ok(atualizado);
     }
 }
 

@@ -13,7 +13,7 @@ public class MarcaMapper {
                 .nome(dto.getNome())
                 .descricao(dto.getDescricao())
                 .website(dto.getWebsite())
-                .ativa(true)  // Valor padrão
+                .ativa(dto.getAtiva() != null ? dto.getAtiva() : true)
                 .build();
     }
 
@@ -28,8 +28,16 @@ public class MarcaMapper {
     }
 
     public void updateEntityFromDTO(MarcaRequestDTO dto, Marca marca) {
-        if (dto.getNome() != null) marca.setNome(dto.getNome());
-        if (dto.getDescricao() != null) marca.setDescricao(dto.getDescricao());
-        if (dto.getWebsite() != null) marca.setWebsite(dto.getWebsite());
+        if (dto.getNome() != null) {
+            marca.setNome(dto.getNome());
+        }
+        if (dto.getDescricao() != null) {
+            marca.setDescricao(dto.getDescricao());
+        }
+        if (dto.getWebsite() != null) {
+            marca.setWebsite(dto.getWebsite());
+        }
+        if (dto.getAtiva() != null) {
+            marca.setAtiva(dto.getAtiva());
+        }
     }
-}

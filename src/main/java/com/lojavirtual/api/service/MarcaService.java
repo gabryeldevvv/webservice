@@ -2,6 +2,7 @@ package com.lojavirtual.api.service;
 
 import com.lojavirtual.api.dto.MarcaRequestDTO;
 import com.lojavirtual.api.dto.MarcaResponseDTO;
+import com.lojavirtual.api.exception.MarcaNaoEncontradaException;
 import com.lojavirtual.api.mapper.MarcaMapper;
 import com.lojavirtual.api.model.Marca;
 import com.lojavirtual.api.repository.MarcaRepository;
@@ -29,10 +30,26 @@ public class MarcaService {
                 .toList();
     }
 
+    public List<MarcaResponseDTO> buscarPorNomeParcial(String nome) {
+        return marcaRepository.findByNomeContainingIgnoreCase(nome)
+                .stream()
+                .map(marcaMapper::toResponseDTO)
+                .toList();
+    }
+
+    public MarcaResponseDTO buscarPorId(Long id) {
+        Marca marca = marcaRepository.findById(id)
+                .orElseThrow(() -> new MarcaNaoEncontradaException(id));
+        return marcaMapper.toResponseDTO(marca);
+    }
+
     public MarcaResponseDTO atualizarMarca(Long id, MarcaRequestDTO dto) {
         Marca marca = marcaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Marca não encontrada"));
-        marcaMapper.updateEntityFromDTO(dto, marca); // Atualiza apenas campos não-nulos
-        return marcaMapper.toResponseDTO(marcaRepository.save(marca));
+                .orElseThrow(() -> new MarcaNaoEncontradaException(id));
+
+        marcaMapper.updateEntityFromDTO(dto, marca);
+
+        Marca atualizada = marcaRepository.save(marca);
+        return marcaMapper.toResponseDTO(atualizada);
     }
 }
