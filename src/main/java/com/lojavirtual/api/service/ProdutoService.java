@@ -42,8 +42,8 @@ public class ProdutoService {
         return produtoMapper.toResponseDTO(salvo);
     }
 
-    public ProdutoResponseDTO atualizarProduto(Long id, ProdutoRequestDTO dto) {
-        Produto produto = produtoRepository.findById(id)
+    public ProdutoResponseDTO atualizarProduto(String id, ProdutoRequestDTO dto) {
+        Produto produto = produtoRepository.findBySku(id)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
         produtoMapper.updateEntityFromDTO(dto, produto);
