@@ -22,7 +22,6 @@ public class ClienteMapper {
 
     public ClienteResponseDTO toResponseDTO(Cliente cliente) {
         return ClienteResponseDTO.builder()
-                .id(cliente.getId())
                 .nome(cliente.getNome())
                 .email(cliente.getEmail())
                 .telefone(cliente.getTelefone())
