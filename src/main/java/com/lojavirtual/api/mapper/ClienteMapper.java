@@ -27,9 +27,7 @@ public class ClienteMapper {
                 .email(cliente.getEmail())
                 .telefone(cliente.getTelefone())
                 .cpf(formatarCpf(cliente.getCpf()))
-                .dataNascimento(cliente.getDataNascimento())
-                .dataCadastro(cliente.getDataCadastro())
-                .ativo(cliente.isAtivo())
+
                 .build();
     }
 

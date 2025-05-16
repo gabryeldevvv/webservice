@@ -13,7 +13,4 @@ public class ClienteResponseDTO {
     private String email;
     private String telefone;
     private String cpf;
-    private LocalDate dataNascimento;
-    private LocalDateTime dataCadastro;
-    private Boolean ativo;
 }
