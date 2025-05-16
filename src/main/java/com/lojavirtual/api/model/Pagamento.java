@@ -17,7 +17,8 @@ import java.time.LocalDateTime;
 public class Pagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_pagamento;
+    @Column(name = "id_pagamento") // Mantém o nome da coluna no banco
+    private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_pedido", nullable = false)

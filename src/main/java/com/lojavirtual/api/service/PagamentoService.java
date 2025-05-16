@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -50,6 +52,13 @@ public class PagamentoService {
         }
 
         return pagamentoMapper.toResponseDTO(atualizado);
+    }
+
+    public List<PagamentoResponseDTO> listarTodos() {
+        return pagamentoRepository.findAll()
+                .stream()
+                .map(pagamentoMapper::toResponseDTO)
+                .toList();
     }
 
     public PagamentoResponseDTO buscarPorId(Long id) {

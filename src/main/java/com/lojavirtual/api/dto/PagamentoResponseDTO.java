@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class PagamentoResponseDTO {
-    private Long idPagamento;
+    private Long id;
     private Long pedidoId;
     private BigDecimal valor;
     private String metodoPagamento;

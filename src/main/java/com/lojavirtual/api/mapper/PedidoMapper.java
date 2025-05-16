@@ -19,7 +19,7 @@ public class PedidoMapper {
 
     public PedidoResponseDTO toResponseDTO(Pedido pedido) {
         return PedidoResponseDTO.builder()
-                .idPedido(pedido.getId_pedido())
+                .idPedido(pedido.getId())
                 .clienteId(pedido.getCliente().getId())
                 .clienteNome(pedido.getCliente().getNome())
                 .enderecoEntrega(formatarEndereco(pedido.getEnderecoEntrega()))
@@ -54,7 +54,6 @@ public class PedidoMapper {
         return pagamento != null
                 ? PagamentoResponseDTO.builder()
                 .id(pagamento.getId())
-                .tipo(pagamento.getTipo())
                 .status(pagamento.getStatus())
                 .build()
                 : null;

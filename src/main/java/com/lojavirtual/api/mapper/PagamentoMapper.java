@@ -19,8 +19,8 @@ public class PagamentoMapper {
 
     public PagamentoResponseDTO toResponseDTO(Pagamento pagamento) {
         return PagamentoResponseDTO.builder()
-                .idPagamento(pagamento.getId_pagamento())
-                .pedidoId(pagamento.getPedido().getId_pedido())
+                .id(pagamento.getId())
+                .pedidoId(pagamento.getPedido().getId())
                 .valor(pagamento.getValor())
                 .metodoPagamento(pagamento.getMetodoPagamento())
                 .status(pagamento.getStatus())

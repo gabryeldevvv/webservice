@@ -19,6 +19,7 @@ public class ItemPedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_item_pedido") // Mantém o nome da coluna no banco
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

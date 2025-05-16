@@ -3,6 +3,7 @@ package com.lojavirtual.api.controller;
 import com.lojavirtual.api.dto.*;
 import com.lojavirtual.api.service.PagamentoService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -5,6 +5,8 @@ import com.lojavirtual.api.dto.ItemPedidoResponseDTO;
 import com.lojavirtual.api.model.ItemPedido;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 public class ItemPedidoMapper {
 
@@ -19,7 +21,7 @@ public class ItemPedidoMapper {
     public ItemPedidoResponseDTO toResponseDTO(ItemPedido item) {
         return ItemPedidoResponseDTO.builder()
                 .id(item.getId())
-                .pedidoId(item.getPedido().getId_pedido())
+                .pedidoId(item.getPedido().getId())
                 .produtoId(item.getProduto().getId())
                 .produtoNome(item.getProduto().getNome())
                 .tamanho(item.getTamanho())
