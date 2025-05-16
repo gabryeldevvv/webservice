@@ -1,6 +1,18 @@
 package com.lojavirtual.api.dto;
 
-import lombok.Builder;
+import lombok.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Builder
-public record PagamentoResponseDTO () {}
+public class PagamentoResponseDTO {
+    private Long idPagamento;
+    private Long pedidoId;
+    private BigDecimal valor;
+    private String metodoPagamento;
+    private String status;
+    private LocalDateTime dataPagamento;
+    private String codigoTransacao;
+}

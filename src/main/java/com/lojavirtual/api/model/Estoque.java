@@ -3,28 +3,36 @@ package com.lojavirtual.api.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
-
-@Entity
-@Table(name = "estoque")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
+@Table(
+        name = "estoque",
+        uniqueConstraints = @UniqueConstraint(
+                name = "uq_estoque_variacao_tamanho",
+                columnNames = {"id_variacao", "id_tamanho"}
+        ),
+        indexes = {
+            @Index(name = "idx_estoque_variacao", columnList = "id_variacao"),
+            @Index(name = "idx_estoque_tamanho", columnList = "id_tamanho")
+        }
+
+            )
 public class Estoque {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_estoque")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_produto", nullable = false)
-    private Produto produto;
+    @JoinColumn(name = "id_variacao")
+    private ProdutoVariacao produtoVariacao;
 
-    @Column(nullable = false, precision = 4, scale = 1)
-    private BigDecimal tamanho;
-
-    @Column(nullable = false)
-    private Integer quantidade = 0;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_tamanho")
+    private Tamanho tamanho;
 }

@@ -1,7 +1,15 @@
 package com.lojavirtual.api.dto;
 
-import lombok.Builder;
+import lombok.*;
 
+@Getter
+@Setter
 @Builder
-public record ImagemProdutoResponseDTO (){
+public class ImagemProdutoResponseDTO {
+    private Long id;
+    private Long produtoId;
+    private String produtoNome;
+    private String urlImagem;
+    private Integer ordem;
+    private Boolean principal;
 }

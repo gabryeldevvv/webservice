@@ -9,12 +9,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "pedido")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(
+        name = "pedido",
+        indexes = {
+                @Index(name = "idx_pedido_cliente", columnList = "id_cliente"),
+                @Index(name = "idx_pedido_status", columnList = "status")
+        }
+)
 public class Pedido {
 
     @Id

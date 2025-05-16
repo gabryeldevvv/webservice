@@ -7,12 +7,18 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "produto")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(
+        name = "produto",
+        indexes = {
+                @Index(name = "idx_produto_marca", columnList = "id_marca"),
+                @Index(name = "idx_produto_categoria", columnList = "id_categoria")
+        }
+)
 public class Produto {
 
     @Id
