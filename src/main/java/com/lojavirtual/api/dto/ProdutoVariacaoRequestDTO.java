@@ -19,8 +19,8 @@ public class ProdutoVariacaoRequestDTO {
     private Boolean ativo;
 
     @NotNull(message = "O Produto é obrigatório")
-    private Produto categoria;
+    private Produto produto;
 
     @NotNull(message = "A Cor é obrigatória")
-    private Cor marca;
+    private Cor cor;
 }

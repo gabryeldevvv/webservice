@@ -22,13 +22,13 @@ public class ProdutoVariacaoService {
         ProdutoVariacao variacao = variacaoMapper.toEntity(dto);
 
         // Resolve relacionamentos
-        Produto produto = produtoRepository.findById(dto.getId())
-                .orElseThrow(() -> new VariacaoNaoEncontradaException("Produto não encontrado: " + dto.getId()));
+        Produto produto = produtoRepository.findById(dto.getProduto().getId())
+                .orElseThrow(() -> new VariacaoNaoEncontradaException("Produto não encontrado: " + dto.getProduto().getId()));
         variacao.setProduto(produto);
 
-        if (dto.getIdCor() != null) {
-            Cor cor = corRepository.findById(dto.getIdCor())
-                    .orElseThrow(() -> new VariacaoNaoEncontradaException("Cor não encontrada: " + dto.getIdCor()));
+        if (dto.getCor().getId() != null) {
+            Cor cor = corRepository.findById(dto.getCor().getId())
+                    .orElseThrow(() -> new VariacaoNaoEncontradaException("Cor não encontrada: " + dto.getCor().getId()));
             variacao.setCor(cor);
         }
 
@@ -61,15 +61,15 @@ public class ProdutoVariacaoService {
                 .orElseThrow(() -> new VariacaoNaoEncontradaException(id));
 
         // Atualiza relacionamentos se necessário
-        if (dto.getId() != null) {
-            Produto produto = produtoRepository.findById(dto.getId())
-                    .orElseThrow(() -> new VariacaoNaoEncontradaException("Produto não encontrado: " + dto.getId()));
+        if (dto.getProduto().getId() != null) {
+            Produto produto = produtoRepository.findById(dto.getProduto().getId())
+                    .orElseThrow(() -> new VariacaoNaoEncontradaException("Produto não encontrado: " + dto.getProduto().getId()));
             variacao.setProduto(produto);
         }
 
-        if (dto.getIdCor() != null) {
-            Cor cor = corRepository.findById(dto.getIdCor())
-                    .orElseThrow(() -> new VariacaoNaoEncontradaException("Cor não encontrada: " + dto.getIdCor()));
+        if (dto.getCor().getId() != null) {
+            Cor cor = corRepository.findById(dto.getCor().getId())
+                    .orElseThrow(() -> new VariacaoNaoEncontradaException("Cor não encontrada: " + dto.getCor().getId()));
             variacao.setCor(cor);
         }
 
