@@ -12,7 +12,7 @@ public class EstoqueMapper {
         return EstoqueResponseDTO.builder()
                 .id(estoque.getId())
                 .variacaoId(estoque.getProdutoVariacao().getId())
-                .nomeVariacao(estoque.getProdutoVariacao().getNomeVariacao())
+                .nomeVariacao(estoque.getProdutoVariacao().getNome())
                 .tamanhoId(estoque.getTamanho().getId())
                 .etiquetaTamanho(estoque.getTamanho().getEtiqueta())
                 .tipoTamanho(estoque.getTamanho().getTipo())

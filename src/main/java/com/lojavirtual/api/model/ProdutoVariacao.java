@@ -29,7 +29,7 @@ public class ProdutoVariacao {
     private Cor cor;
 
     @Column(name = "nome_variacao", nullable = false, length = 100)
-    private String nomeVariacao;
+    private String nome;
 
     @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean ativo = true;

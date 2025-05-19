@@ -6,12 +6,27 @@ import lombok.*;
 @Setter
 @Builder
 public class ProdutoVariacaoResponseDTO {
+
     private Long id;
-    private String nomeVariacao;
+    private String nome;
     private Boolean ativo;
-    private Long idProduto;
-    private String nomeProduto;
-    private Long idCor;
-    private String nomeCor;
-    private String codigoHexCor; // Extra do relacionamento
+    private ProdutoResumoDTO produto;
+    private CorResumoDTO cor;
+
+    @Getter
+    @Setter
+    @Builder
+    public static class ProdutoResumoDTO {
+        private Long id;
+        private String nome;
+    }
+
+    @Getter
+    @Setter
+    @Builder
+    public static class CorResumoDTO {
+        private Long id;
+        private String nome;
+        private String codigoHex;
+    }
 }

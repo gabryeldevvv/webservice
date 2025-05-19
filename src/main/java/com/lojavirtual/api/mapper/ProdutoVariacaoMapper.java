@@ -10,7 +10,7 @@ public class ProdutoVariacaoMapper {
 
     public ProdutoVariacao toEntity(ProdutoVariacaoRequestDTO dto) {
         return ProdutoVariacao.builder()
-                .nomeVariacao(dto.getNomeVariacao())
+                .nome(dto.getNome())
                 .ativo(dto.getAtivo() != null ? dto.getAtivo() : true)
                 .build();
     }
@@ -18,19 +18,23 @@ public class ProdutoVariacaoMapper {
     public ProdutoVariacaoResponseDTO toResponseDTO(ProdutoVariacao variacao) {
         return ProdutoVariacaoResponseDTO.builder()
                 .id(variacao.getId())
-                .nomeVariacao(variacao.getNomeVariacao())
+                .nome(variacao.getNome())
                 .ativo(variacao.isAtivo())
-                .idProduto(variacao.getProduto().getId())
-                .nomeProduto(variacao.getProduto().getNome())
-                .idCor(variacao.getCor() != null ? variacao.getCor().getId() : null)
-                .nomeCor(variacao.getCor() != null ? variacao.getCor().getNome() : null)
-                .codigoHexCor(variacao.getCor() != null ? variacao.getCor().getCodigoHex() : null)
+                .produto(ProdutoVariacaoResponseDTO.ProdutoResumoDTO.builder()
+                        .id(variacao.getProduto().getId())
+                        .nome(variacao.getProduto().getNome())
+                        .build())
+                .cor(variacao.getCor() != null ? ProdutoVariacaoResponseDTO.CorResumoDTO.builder()
+                        .id(variacao.getCor().getId())
+                        .nome(variacao.getCor().getNome())
+                        .codigoHex(variacao.getCor().getCodigoHex())
+                        .build() : null)
                 .build();
     }
 
     public void updateEntityFromDTO(ProdutoVariacaoRequestDTO dto, ProdutoVariacao variacao) {
-        if (dto.getNomeVariacao() != null) {
-            variacao.setNomeVariacao(dto.getNomeVariacao());
+        if (dto.getNome() != null) {
+            variacao.setNome(dto.getNome());
         }
         if (dto.getAtivo() != null) {
             variacao.setAtivo(dto.getAtivo());

@@ -22,8 +22,8 @@ public class ProdutoVariacaoService {
         ProdutoVariacao variacao = variacaoMapper.toEntity(dto);
 
         // Resolve relacionamentos
-        Produto produto = produtoRepository.findById(dto.getIdProduto())
-                .orElseThrow(() -> new VariacaoNaoEncontradaException("Produto não encontrado: " + dto.getIdProduto()));
+        Produto produto = produtoRepository.findById(dto.getId())
+                .orElseThrow(() -> new VariacaoNaoEncontradaException("Produto não encontrado: " + dto.getId()));
         variacao.setProduto(produto);
 
         if (dto.getIdCor() != null) {
@@ -61,9 +61,9 @@ public class ProdutoVariacaoService {
                 .orElseThrow(() -> new VariacaoNaoEncontradaException(id));
 
         // Atualiza relacionamentos se necessário
-        if (dto.getIdProduto() != null) {
-            Produto produto = produtoRepository.findById(dto.getIdProduto())
-                    .orElseThrow(() -> new VariacaoNaoEncontradaException("Produto não encontrado: " + dto.getIdProduto()));
+        if (dto.getId() != null) {
+            Produto produto = produtoRepository.findById(dto.getId())
+                    .orElseThrow(() -> new VariacaoNaoEncontradaException("Produto não encontrado: " + dto.getId()));
             variacao.setProduto(produto);
         }
 
