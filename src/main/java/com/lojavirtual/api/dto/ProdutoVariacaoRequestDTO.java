@@ -1,5 +1,7 @@
 package com.lojavirtual.api.dto;
 
+import com.lojavirtual.api.model.Cor;
+import com.lojavirtual.api.model.Produto;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -10,14 +12,15 @@ import lombok.*;
 @AllArgsConstructor
 public class ProdutoVariacaoRequestDTO {
 
-    @NotNull(message = "O ID do produto é obrigatório")
-    private Long id;
-
-    private Long idCor;
-
     @NotBlank(message = "O nome da variação é obrigatório")
     @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres")
     private String nome;
 
     private Boolean ativo;
+
+    @NotNull(message = "O Produto é obrigatório")
+    private Produto categoria;
+
+    @NotNull(message = "A Cor é obrigatória")
+    private Cor marca;
 }
