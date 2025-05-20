@@ -55,9 +55,6 @@ public class Produto {
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ImagemProduto> imagens;
-
     @OneToMany(mappedBy = "produto")
     private List<ItemPedido> itensPedido;
 }

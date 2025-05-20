@@ -8,10 +8,10 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImagemProdutoRequestDTO {
+public class ImagemVariacaoRequestDTO {
 
     @NotNull(message = "ID do produto é obrigatório")
-    private Long produtoId;
+    private Long id;
 
     @NotBlank(message = "URL da imagem é obrigatória")
     @Size(max = 255, message = "URL deve ter até 255 caracteres")

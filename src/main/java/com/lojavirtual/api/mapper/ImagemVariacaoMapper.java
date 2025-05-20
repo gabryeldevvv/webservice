@@ -1,33 +1,32 @@
 package com.lojavirtual.api.mapper;
 
-import com.lojavirtual.api.dto.ImagemProdutoRequestDTO;
-import com.lojavirtual.api.dto.ImagemProdutoResponseDTO;
-import com.lojavirtual.api.model.ImagemProduto;
+import com.lojavirtual.api.dto.ImagemVariacaoRequestDTO;
+import com.lojavirtual.api.dto.ImagemVariacaoResponseDTO;
+import com.lojavirtual.api.model.ImagemVariacao;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ImagemProdutoMapper {
+public class ImagemVariacaoMapper {
 
-    public ImagemProduto toEntity(ImagemProdutoRequestDTO dto) {
-        return ImagemProduto.builder()
+    public ImagemVariacao toEntity(ImagemVariacaoRequestDTO dto) {
+        return ImagemVariacao.builder()
                 .urlImagem(dto.getUrlImagem())
                 .ordem(dto.getOrdem())
                 .principal(dto.getPrincipal() != null ? dto.getPrincipal() : false)
                 .build();
     }
 
-    public ImagemProdutoResponseDTO toResponseDTO(ImagemProduto imagem) {
-        return ImagemProdutoResponseDTO.builder()
+    public ImagemVariacaoResponseDTO toResponseDTO(ImagemVariacao imagem) {
+        return ImagemVariacaoResponseDTO.builder()
                 .id(imagem.getId())
-                .produtoId(imagem.getProduto().getId())
-                .produtoNome(imagem.getProduto().getNome())
+                .idVariacao(imagem.getVariacao().getId())
                 .urlImagem(imagem.getUrlImagem())
                 .ordem(imagem.getOrdem())
                 .principal(imagem.isPrincipal())
                 .build();
     }
 
-    public void updateEntityFromDTO(ImagemProdutoRequestDTO dto, ImagemProduto imagem) {
+    public void updateEntityFromDTO(ImagemVariacaoRequestDTO dto, ImagemVariacao imagem) {
         if (dto.getUrlImagem() != null) imagem.setUrlImagem(dto.getUrlImagem());
         if (dto.getOrdem() != null) imagem.setOrdem(dto.getOrdem());
         if (dto.getPrincipal() != null) imagem.setPrincipal(dto.getPrincipal());

@@ -4,23 +4,23 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "imagem_produto")
+@Table(name = "imagem_variacao")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ImagemProduto {
+public class ImagemVariacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_imagem") // Mantém o nome da coluna no banco
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_produto", nullable = false)
-    private Produto produto;
+    @JoinColumn(name = "id_variacao", nullable = false)
+    private ProdutoVariacao variacao;
 
-    @Column(nullable = false, length = 255)
+    @Column(name = "url_imagem", nullable = false, length = 255)
     private String urlImagem;
 
     @Column(nullable = false)

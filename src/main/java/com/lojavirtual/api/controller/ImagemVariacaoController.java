@@ -1,7 +1,8 @@
 package com.lojavirtual.api.controller;
 
-import com.lojavirtual.api.dto.*;
-import com.lojavirtual.api.service.ImagemProdutoService;
+import com.lojavirtual.api.dto.ImagemVariacaoRequestDTO;
+import com.lojavirtual.api.dto.ImagemVariacaoResponseDTO;
+import com.lojavirtual.api.service.ImagemVariacaoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,24 +13,24 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/imagens-produto")
 @RequiredArgsConstructor
-public class ImagemProdutoController {
+public class ImagemVariacaoController {
 
-    private final ImagemProdutoService imagemService;
+    private final ImagemVariacaoService imagemService;
 
     @PostMapping
-    public ResponseEntity<ImagemProdutoResponseDTO> criar(@Valid @RequestBody ImagemProdutoRequestDTO dto) {
+    public ResponseEntity<ImagemVariacaoResponseDTO> criar(@Valid @RequestBody ImagemVariacaoRequestDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(imagemService.criarImagem(dto));
     }
 
     @GetMapping("/produto/{produtoId}")
-    public ResponseEntity<List<ImagemProdutoResponseDTO>> listarPorProduto(@PathVariable Long produtoId) {
-        return ResponseEntity.ok(imagemService.listarPorProduto(produtoId));
+    public ResponseEntity<List<ImagemVariacaoResponseDTO>> listarPorVariacao(@PathVariable Long produtoId) {
+        return ResponseEntity.ok(imagemService.listarPorVariacao(produtoId));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ImagemProdutoResponseDTO> atualizar(
+    public ResponseEntity<ImagemVariacaoResponseDTO> atualizar(
             @PathVariable Long id,
-            @Valid @RequestBody ImagemProdutoRequestDTO dto
+            @Valid @RequestBody ImagemVariacaoRequestDTO dto
     ) {
         return ResponseEntity.ok(imagemService.atualizarImagem(id, dto));
     }
