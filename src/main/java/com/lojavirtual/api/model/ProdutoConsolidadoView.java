@@ -20,7 +20,7 @@ public class ProdutoConsolidadoView {
     @Id
     private Long id;
 
-    @Column(name = "nome_variacao")
+    @Column(name = "nome")
     private String nome;
 
     @Column(name = "preco")
