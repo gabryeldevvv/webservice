@@ -10,5 +10,4 @@ import java.util.Optional;
 @Repository
 public interface ProdutoVariacaoRepository extends JpaRepository<ProdutoVariacao, Long> {
     List<ProdutoVariacao> findByProdutoId(Long produtoId);
-    Optional<ProdutoVariacao> findByUrl(String url);
 }

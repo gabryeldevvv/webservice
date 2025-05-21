@@ -1,5 +1,6 @@
 package com.lojavirtual.api.mapper;
 
+import com.lojavirtual.api.dto.ProdutoConsolidadoDTO;
 import com.lojavirtual.api.dto.ProdutoVariacaoRequestDTO;
 import com.lojavirtual.api.dto.ProdutoVariacaoResponseDTO;
 import com.lojavirtual.api.model.ProdutoVariacao;

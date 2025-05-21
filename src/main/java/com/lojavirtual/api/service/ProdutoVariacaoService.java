@@ -1,8 +1,11 @@
 package com.lojavirtual.api.service;
 
+import com.lojavirtual.api.dto.ProdutoConsolidadoDTO;
 import com.lojavirtual.api.dto.ProdutoVariacaoResponseDTO;
 import com.lojavirtual.api.dto.ProdutoVariacaoRequestDTO;
+import com.lojavirtual.api.exception.ProdutoNaoEncontradoException;
 import com.lojavirtual.api.exception.VariacaoNaoEncontradaException;
+import com.lojavirtual.api.mapper.ProdutoConsolidadoMapper;
 import com.lojavirtual.api.mapper.ProdutoVariacaoMapper;
 import com.lojavirtual.api.model.*;
 import com.lojavirtual.api.repository.*;
@@ -16,7 +19,9 @@ public class ProdutoVariacaoService {
     private final ProdutoVariacaoRepository variacaoRepository;
     private final ProdutoRepository produtoRepository;
     private final CorRepository corRepository;
+    private final ProdutoConsolidadoRepository produtoConsolidadoRepository;
     private final ProdutoVariacaoMapper variacaoMapper;
+    private final ProdutoConsolidadoMapper produtoConsolidadoMapper;
 
     public ProdutoVariacaoResponseDTO criarVariacao(ProdutoVariacaoRequestDTO dto) {
         ProdutoVariacao variacao = variacaoMapper.toEntity(dto);
@@ -56,10 +61,9 @@ public class ProdutoVariacaoService {
         return variacaoMapper.toResponseDTO(variacao);
     }
 
-    public ProdutoVariacaoResponseDTO buscarPorUrl(String url) {
-        ProdutoVariacao variacao = variacaoRepository.findByUrl(url)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
-        return variacaoMapper.toResponseDTO(variacao);
+    public ProdutoConsolidadoDTO buscarPorUrl(String url) {
+        ProdutoConsolidadoView produtoConsolidadoView = produtoConsolidadoRepository.buscarPorUrl(url);
+        return produtoConsolidadoMapper.toResponseDTO(produtoConsolidadoView);
     }
 
     public ProdutoVariacaoResponseDTO atualizarVariacao(Long id, ProdutoVariacaoRequestDTO dto) {

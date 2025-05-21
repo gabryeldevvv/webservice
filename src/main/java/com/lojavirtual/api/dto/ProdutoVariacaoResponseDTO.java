@@ -2,6 +2,8 @@ package com.lojavirtual.api.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
