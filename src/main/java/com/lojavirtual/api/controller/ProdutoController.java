@@ -46,6 +46,15 @@ public class ProdutoController {
         }
     }
 
+    @GetMapping("/{url}")
+    public ResponseEntity<?> buscarPorUrl(@PathVariable String url) {
+        try {
+            return ResponseEntity.ok(produtoService.buscarPorUrl(url));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erro ao buscar produto: " + e.getMessage());
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizar(@PathVariable String id, @Valid @RequestBody ProdutoRequestDTO dto) {
         try {

@@ -16,6 +16,7 @@ public class ProdutoResponseDTO {
     private String descricao;
     private BigDecimal preco;
     private BigDecimal precoDesconto;
+    private String url;
     private String sku;
     private boolean ativo;
     private boolean destaque;
