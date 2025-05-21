@@ -46,7 +46,7 @@ public class ProdutoController {
         }
     }
 
-    @GetMapping("/{url}")
+    @GetMapping("url/{url}")
     public ResponseEntity<?> buscarPorUrl(@PathVariable String url) {
         try {
             return ResponseEntity.ok(produtoService.buscarPorUrl(url));
