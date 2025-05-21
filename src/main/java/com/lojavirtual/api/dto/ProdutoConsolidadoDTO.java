@@ -16,5 +16,5 @@ public class ProdutoConsolidadoDTO {
     private String marcaNome;
     private String corNome;
     private String categoriaNome;
-    private String imagens;
+    private List<ImagemDTO> imagens;
 }
