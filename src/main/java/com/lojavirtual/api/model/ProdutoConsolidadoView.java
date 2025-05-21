@@ -18,7 +18,6 @@ import java.math.BigDecimal;
 public class ProdutoConsolidadoView {
 
     @Id
-    @Column(name = "id_variacao")
     private Long id;
 
     @Column(name = "nome_variacao")
