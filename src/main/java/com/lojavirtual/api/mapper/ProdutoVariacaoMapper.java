@@ -20,6 +20,7 @@ public class ProdutoVariacaoMapper {
                 .id(variacao.getId())
                 .nome(variacao.getNome())
                 .ativo(variacao.isAtivo())
+                .url(variacao.getUrl())
                 .produto(ProdutoVariacaoResponseDTO.ProdutoResumoDTO.builder()
                         .id(variacao.getProduto().getId())
                         .nome(variacao.getProduto().getNome())

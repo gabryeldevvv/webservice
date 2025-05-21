@@ -24,6 +24,9 @@ public class ProdutoVariacao {
     @JoinColumn(name = "id_produto", nullable = false)
     private Produto produto;
 
+    @Column(nullable = false, unique = true, length = 150)
+    private String url;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cor")
     private Cor cor;

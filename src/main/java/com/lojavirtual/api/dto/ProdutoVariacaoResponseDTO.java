@@ -11,6 +11,7 @@ public class ProdutoVariacaoResponseDTO {
     private String nome;
     private Boolean ativo;
     private ProdutoResumoDTO produto;
+    private String url;
     private CorResumoDTO cor;
 
     @Getter

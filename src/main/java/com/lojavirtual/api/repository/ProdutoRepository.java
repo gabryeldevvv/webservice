@@ -18,6 +18,4 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long>, JpaSpec
     Optional<Produto> findBySku(String sku);
 
     boolean existsBySku(String sku);
-
-    Optional<Produto> findByUrl(String url);
 }

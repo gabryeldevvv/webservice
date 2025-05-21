@@ -1,7 +1,7 @@
 package com.lojavirtual.api.service;
 
-import com.lojavirtual.api.dto.ProdutoVariacaoRequestDTO;
 import com.lojavirtual.api.dto.ProdutoVariacaoResponseDTO;
+import com.lojavirtual.api.dto.ProdutoVariacaoRequestDTO;
 import com.lojavirtual.api.exception.VariacaoNaoEncontradaException;
 import com.lojavirtual.api.mapper.ProdutoVariacaoMapper;
 import com.lojavirtual.api.model.*;
@@ -53,6 +53,12 @@ public class ProdutoVariacaoService {
     public ProdutoVariacaoResponseDTO buscarPorId(Long id) {
         ProdutoVariacao variacao = variacaoRepository.findById(id)
                 .orElseThrow(() -> new VariacaoNaoEncontradaException(id));
+        return variacaoMapper.toResponseDTO(variacao);
+    }
+
+    public ProdutoVariacaoResponseDTO buscarPorUrl(String url) {
+        ProdutoVariacao variacao = variacaoRepository.findByUrl(url)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
         return variacaoMapper.toResponseDTO(variacao);
     }
 

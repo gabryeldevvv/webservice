@@ -27,7 +27,6 @@ public class ProdutoMapper {
                 .id(produto.getId())
                 .nome(produto.getNome())
                 .descricao(produto.getDescricao())
-                .url(produto.getUrl())
                 .preco(produto.getPreco())
                 .precoDesconto(produto.getPrecoDesconto())
                 .sku(produto.getSku())

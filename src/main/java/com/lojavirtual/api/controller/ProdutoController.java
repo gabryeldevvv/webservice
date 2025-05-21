@@ -3,6 +3,7 @@ package com.lojavirtual.api.controller;
 import com.lojavirtual.api.dto.ProdutoRequestDTO;
 import com.lojavirtual.api.dto.ProdutoResponseDTO;
 import com.lojavirtual.api.service.ProdutoService;
+import com.lojavirtual.api.service.ProdutoVariacaoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ public class ProdutoController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProdutoController.class);
     private final ProdutoService produtoService;
+    private final ProdutoVariacaoService variacaoService;
 
     @PostMapping
     public ResponseEntity<?> criar(@Valid @RequestBody ProdutoRequestDTO dto) {
@@ -49,7 +51,7 @@ public class ProdutoController {
     @GetMapping("/url/{url}")
     public ResponseEntity<?> buscarPorUrl(@PathVariable String url) {
         try {
-            return ResponseEntity.ok(produtoService.buscarPorUrl(url));
+            return ResponseEntity.ok(variacaoService.buscarPorUrl(url));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erro ao buscar produto: " + e.getMessage());
         }
