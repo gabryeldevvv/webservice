@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface VariacaoTamanhoRepository extends JpaRepository<VariacaoTamanho, Long> {
 
-    @Query("SELECT t.etiqueta FROM VariacaoTamanho vt JOIN vt.tamanho t WHERE vt.variacao.id = :variacaoId")
-    List<String> findEtiquetasByVariacaoId(Long variacaoId);
+    @Query("SELECT t.etiqueta FROM VariacaoTamanho vt JOIN vt.tamanho t WHERE vt.variacao.url = :urlProduto")
+    List<String> findEtiquetasByUrl(String urlProduto);
 }

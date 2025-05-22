@@ -11,7 +11,7 @@ public class VariacaoTamanhoService {
 
     private final VariacaoTamanhoRepository repository;
 
-    public List<String> buscarEtiquetasPorVariacaoId(Long variacaoId) {
-        return repository.findEtiquetasByVariacaoId(variacaoId);
+    public List<String> buscarEtiquetasPorVariacaoUrl(String urlProduto) {
+        return repository.findEtiquetasByUrl(urlProduto);
     }
 }
