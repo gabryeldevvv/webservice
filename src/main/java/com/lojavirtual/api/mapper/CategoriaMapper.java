@@ -11,7 +11,6 @@ public class CategoriaMapper {
     public Categoria toEntity(CategoriaRequestDTO dto) {
         return Categoria.builder()
                 .nome(dto.getNome())
-                .descricao(dto.getDescricao())
                 .ativa(dto.getAtiva() != null ? dto.getAtiva() : true)
                 .build();
     }
@@ -20,7 +19,6 @@ public class CategoriaMapper {
         CategoriaResponseDTO.CategoriaResponseDTOBuilder builder = CategoriaResponseDTO.builder()
                 .id(categoria.getId())
                 .nome(categoria.getNome())
-                .descricao(categoria.getDescricao())
                 .ativa(categoria.isAtiva());
 
         // Preenche idPai e nomePai se existir
@@ -35,9 +33,6 @@ public class CategoriaMapper {
     public void updateEntityFromDTO(CategoriaRequestDTO dto, Categoria categoria) {
         if (dto.getNome() != null) {
             categoria.setNome(dto.getNome());
-        }
-        if (dto.getDescricao() != null) {
-            categoria.setDescricao(dto.getDescricao());
         }
         if (dto.getAtiva() != null) {
             categoria.setAtiva(dto.getAtiva());

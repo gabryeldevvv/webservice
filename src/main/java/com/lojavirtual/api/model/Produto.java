@@ -35,17 +35,11 @@ public class Produto {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal precoDesconto;
-
     @Column(nullable = false, unique = true, length = 50)
     private String sku;
 
     @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean ativo = true;
-
-    @Column(nullable = false, columnDefinition = "boolean default false")
-    private boolean destaque = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_marca")

@@ -21,9 +21,6 @@ public class Categoria {
     @Column(nullable = false, unique = true, length = 50)
     private String nome;
 
-    @Column(columnDefinition = "TEXT")
-    private String descricao;
-
     @Column(nullable = false, columnDefinition = "boolean default true")
     private boolean ativa = true;
 

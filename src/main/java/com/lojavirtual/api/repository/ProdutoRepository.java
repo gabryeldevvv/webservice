@@ -11,8 +11,6 @@ import java.util.Optional;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long>, JpaSpecificationExecutor<Produto> {
 
-    List<Produto> findByDestaqueTrue();
-
     List<Produto> findByAtivoTrue();
 
     Optional<Produto> findBySku(String sku);
