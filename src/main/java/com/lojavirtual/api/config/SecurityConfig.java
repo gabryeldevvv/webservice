@@ -24,7 +24,8 @@ public class SecurityConfig {
     private static final List<String> ALLOWED_ORIGINS = Arrays.asList(
             "http://localhost:5173",
             "https://adm-lojavirtual.vercel.app",
-            "https://ecommerce-5a44.vercel.app"
+            "https://ecommerce-5a44.vercel.app",
+            "186.250.111.240"
     );
 
     private static final List<String> ALLOWED_METHODS = Arrays.asList(
